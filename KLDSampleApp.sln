@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32510.428
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KLDSampleApp", "KLDSampleApp\KLDSampleApp.csproj", "{C3794A8F-1D9E-421C-ABA9-2DBDCB54DC5A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C3794A8F-1D9E-421C-ABA9-2DBDCB54DC5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3794A8F-1D9E-421C-ABA9-2DBDCB54DC5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3794A8F-1D9E-421C-ABA9-2DBDCB54DC5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3794A8F-1D9E-421C-ABA9-2DBDCB54DC5A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {658F79E9-3C8D-4AE1-B867-CBAFA63E3D30}
+	EndGlobalSection
+EndGlobal
