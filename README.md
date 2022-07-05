@@ -1,5 +1,4 @@
 # KLDSampleApp
-C#
 Write a command line application (preferably in C#) that does the following:   
 1.	Takes two inputs and a flag 
  .	A directory that contains the files to be analyzed
