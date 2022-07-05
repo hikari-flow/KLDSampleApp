@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections.Generic;
 
 namespace KLDSampleApp
 {
@@ -6,13 +6,14 @@ namespace KLDSampleApp
     {
         static void Main(string[] args)
         {
-            Console.Write("Input Path: ");
-            string inputPath = Console.ReadLine();
+            var userInput = new Dictionary<string, IUserInput>
+            {
+                { "Input Path", new FilePath(PathConstraint.IsDirectory, new Dictionary<string, string>{ { "-r", "Include all subdirectories" } }) },
+                { "Output Path", new FilePath() }
+            };
 
-            Console.Write("Output Path: ");
-            string outputPath = Console.ReadLine();
-
-            Console.WriteLine($"{inputPath}\n{outputPath}");
+            var mimeDetector = new MimeDetector(new CliController(), new CliLogger());
+            mimeDetector.Run(userInput);
         }
     }
 }
