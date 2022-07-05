@@ -23,7 +23,7 @@ namespace KLDSampleApp
             {
                 _value = Path.TrimEndingDirectorySeparator(value.Trim());
 
-                if (String.IsNullOrWhiteSpace(_value) || !Path.IsPathFullyQualified(_value) || !Exists(_value))
+                if (string.IsNullOrWhiteSpace(_value) || !Path.IsPathFullyQualified(_value) || !Exists(_value))
                 {
                     throw new Exception("Path doesn't exist or isn't fully qualified");
                 }
@@ -44,9 +44,7 @@ namespace KLDSampleApp
         }
 
         // CONSTRUCTORS
-        public FilePath()
-        {
-        }
+        public FilePath(){}
 
         public FilePath(string path)
         {
