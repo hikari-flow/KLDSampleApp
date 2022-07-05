@@ -2,7 +2,7 @@
 
 namespace KLDSampleApp
 {
-    class MimeDetector
+    public class MimeDetector
     {
         private readonly CsvGenerator _csvGenerator;
         private readonly IInputRetriever _inputRetriever;
@@ -10,15 +10,15 @@ namespace KLDSampleApp
 
         public MimeDetector(IInputRetriever inputRetriever, ILogger logger)
         {
-            this._inputRetriever = inputRetriever; // is using "this." standard and recommended? or do we not use it?
-            this._logger = logger;
-            this._csvGenerator = new CsvGenerator(this._logger);
+            _inputRetriever = inputRetriever;
+            _logger = logger;
+            _csvGenerator = new CsvGenerator(_logger);
         }
 
-        public void Run(Dictionary<string, IUserInput> userInput)
+        public void Run(IDictionary<string, IUserInput> userInput)
         {
-            this._inputRetriever.GetUserInput(userInput);
-            this._csvGenerator.Generate((FilePath)userInput["Input Path"], (FilePath)userInput["Output Path"], new List<string> { "JPG", "PDF" });
+            _inputRetriever.GetUserInput(userInput);
+            _csvGenerator.Generate((FilePath)userInput["Input Path"], (FilePath)userInput["Output Path"], new List<string> { "JPG", "PDF" });
         }
     }
 }

@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace KLDSampleApp
 {
-    class CliController : IInputRetriever
+    public class CliController : IInputRetriever
     {
         /// <summary>
         /// Loop through list of required input from <paramref name="userInput"/> and request user input via CLI.
         /// </summary>
         /// <param name="userInput">List of all input values that need to be retrieved from user</param>
-        public void GetUserInput(Dictionary<string, IUserInput> userInput)
+        public void GetUserInput(IDictionary<string, IUserInput> userInput)
         {
             foreach (var item in userInput)
             {
@@ -47,8 +47,8 @@ namespace KLDSampleApp
         /// <summary>
         /// Turns console text to desired <paramref name="color"/>, displays message, then resets text color back to default. Doesn't write a newline at the end.
         /// </summary>
-        /// <param name="message">Message to be displayed</param>
-        /// <param name="color">Desired color to display message in (defaults to white)</param>
+        /// <param name="message">Message to be displayed.</param>
+        /// <param name="color">Desired color to display message in (defaults to white).</param>
         private static void Display(string message, ConsoleColor color = ConsoleColor.White)
         {
             Console.ForegroundColor = color;
@@ -71,7 +71,7 @@ namespace KLDSampleApp
         /// <summary>
         /// Deals with the special properties of FilePath input types.
         /// </summary>
-        /// <param name="path">The FilePath object to be handled</param>
+        /// <param name="path">The FilePath object to be handled.</param>
         private static void HandleFilePaths(FilePath path)
         {
             // If path can accept flags, request user input

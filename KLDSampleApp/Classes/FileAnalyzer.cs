@@ -6,7 +6,7 @@ using System.Text;
 
 namespace KLDSampleApp
 {
-    static class FileAnalyzer
+    public static class FileAnalyzer
     {
         private static Dictionary<string, string> FileTypes = ParseFileTypesList($"{Path.Join(GetSolutionDirectory(), "FileTypes.txt")}");
         
@@ -49,12 +49,6 @@ namespace KLDSampleApp
         public static string CalculateMD5(string path)
         {
             /*
-            var fileStream = File.OpenRead(path);
-            var hash = MD5.Create().ComputeHash(fileStream);
-            */
-
-            /* why do we need to use using? what does using mean and why did the guy on stackoverflow choose to use it even though it yields the same result without "using"?
-             * does it have to do with filestreaming?
             using (var md5 = MD5.Create())
             {
                 using (var fileStream = File.OpenRead(path))
@@ -65,10 +59,8 @@ namespace KLDSampleApp
             }
             */
 
-            // is using the simplified version of using here correct?
             using var md5 = MD5.Create();
             using var fileStream = File.OpenRead(path);
-
             var hash = md5.ComputeHash(fileStream);
 
             return BitConverter.ToString(hash).Replace("-", "").ToLowerInvariant();
@@ -83,16 +75,11 @@ namespace KLDSampleApp
         {
             var fileTypes = new Dictionary<string, string>();
 
-            try
+            foreach (var line in File.ReadLines(path))
             {
-                foreach (var line in File.ReadLines(path))
-                {
-                    string[] split = line.Split(":");
-                    fileTypes.Add(split[0], split[1]);
-                }
-                
+                string[] split = line.Split(":");
+                fileTypes.Add(split[0], split[1]);
             }
-            catch { throw; }
 
             return fileTypes;
         }

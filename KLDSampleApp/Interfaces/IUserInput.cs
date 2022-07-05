@@ -1,6 +1,6 @@
 ﻿namespace KLDSampleApp
 {
-    interface IUserInput
+    public interface IUserInput
     {
         string Value { get; set; }
     }

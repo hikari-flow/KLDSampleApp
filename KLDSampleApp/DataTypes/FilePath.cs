@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace KLDSampleApp
 {
-    class FilePath : IUserInput
+    public class FilePath : IUserInput
     {
         private string _value = string.Empty;
         private Dictionary<string, string> _acceptedFlags = new();
@@ -18,52 +18,44 @@ namespace KLDSampleApp
 
         public string Value
         {
-            get => this._value;
+            get => _value;
             set
             {
-                this._value = Path.TrimEndingDirectorySeparator(value.Trim());
+                _value = Path.TrimEndingDirectorySeparator(value.Trim());
 
-                if (String.IsNullOrWhiteSpace(this._value) || !Path.IsPathFullyQualified(this._value) || !Exists(this._value))
+                if (String.IsNullOrWhiteSpace(_value) || !Path.IsPathFullyQualified(_value) || !Exists(_value))
                 {
                     throw new Exception("Path doesn't exist or isn't fully qualified");
                 }
 
-                try
+                if (IsDirectory())
                 {
-                    if (IsDirectory())
-                    {
-                        this._value += Path.DirectorySeparatorChar;
-                    }
-
-                    this._value = Path.GetFullPath(this._value);
-
-                    if (this.Constraint == PathConstraint.IsDirectory && IsFile())
-                        throw new Exception("Path must point to a directory");
-
-                    if (this.Constraint == PathConstraint.IsFile && IsDirectory())
-                        throw new Exception("Path must point to a file");
+                    _value += Path.DirectorySeparatorChar;
                 }
-                catch (ArgumentException) { throw; }
-                catch (SecurityException) { throw; }
-                catch (NotSupportedException) { throw; }
-                catch (PathTooLongException) { throw; }
+
+                _value = Path.GetFullPath(_value);
+
+                if (Constraint == PathConstraint.IsDirectory && IsFile())
+                    throw new Exception("Path must point to a directory");
+
+                if (Constraint == PathConstraint.IsFile && IsDirectory())
+                    throw new Exception("Path must point to a file");
             }
         }
 
         // CONSTRUCTORS
         public FilePath()
         {
-            // Is there a cleaner way to do these constructors?
         }
 
         public FilePath(string path)
         {
-            this.Value = path;
+            Value = path;
         }
 
         public FilePath(string path, PathConstraint constraint) : this(path)
         {
-            this.Constraint = constraint;
+            Constraint = constraint;
         }
 
         public FilePath(string path, Dictionary<string, string> acceptedFlags) : this(path)
@@ -78,7 +70,7 @@ namespace KLDSampleApp
 
         public FilePath(PathConstraint constraint)
         {
-            this.Constraint = constraint;
+            Constraint = constraint;
         }
 
         public FilePath(PathConstraint constraint, Dictionary<string, string> acceptedFlags) : this(constraint)
@@ -95,29 +87,29 @@ namespace KLDSampleApp
 
         public bool IsDirectory()
         {
-            FileAttributes attr = File.GetAttributes(this._value);
+            FileAttributes attr = File.GetAttributes(_value);
 
             return (attr & FileAttributes.Directory) == FileAttributes.Directory; // what does stuff in the parenthesis mean? why can't you just do (attr == FileAttributes.Directory)?
         }
 
         public bool IsFile()
         {
-            FileAttributes attr = File.GetAttributes(this._value);
+            FileAttributes attr = File.GetAttributes(_value);
 
             return (attr & FileAttributes.Directory) != FileAttributes.Directory;
         }
 
-        public string[] GetAcceptedFlags() => this._acceptedFlags.Keys.ToArray();
-        public string GetAcceptedFlagDescription(string flag) => this._acceptedFlags[flag];
-        public bool AcceptsFlags() => this._acceptedFlags.Count > 0 ? true : false;
-        public void ClearAcceptedFlags() => this._acceptedFlags.Clear();
-        public void RemoveAcceptedFlag(string flag) => this._acceptedFlags.Remove(flag);
+        public string[] GetAcceptedFlags() => _acceptedFlags.Keys.ToArray();
+        public string GetAcceptedFlagDescription(string flag) => _acceptedFlags[flag];
+        public bool AcceptsFlags() => _acceptedFlags.Count > 0 ? true : false;
+        public void ClearAcceptedFlags() => _acceptedFlags.Clear();
+        public void RemoveAcceptedFlag(string flag) => _acceptedFlags.Remove(flag);
 
         public void AddAcceptedFlag(string flag, string description)
         {
             if(IsValidFlagFormat(flag, GetAcceptedFlags()))
             {
-                this._acceptedFlags.Add(flag, description);
+                _acceptedFlags.Add(flag, description);
             }
         }
 
@@ -129,21 +121,21 @@ namespace KLDSampleApp
             }
         }
 
-        public string[] GetFlags() => this._flags.ToArray();
-        public void ClearFlags() => this._flags.Clear();
-        public void RemoveFlag(string flag) => this._flags.Remove(flag);
-        public bool ContainsFlag(string flag) => this._flags.Contains(flag);
+        public string[] GetFlags() => _flags.ToArray();
+        public void ClearFlags() => _flags.Clear();
+        public void RemoveFlag(string flag) => _flags.Remove(flag);
+        public bool ContainsFlag(string flag) => _flags.Contains(flag);
 
         public void AddFlag(string flag)
         {
-            if(!this._acceptedFlags.ContainsKey(flag))
+            if(!_acceptedFlags.ContainsKey(flag))
             {
                 throw new Exception($"{flag} is not an accepted flag");
             }
 
             if (IsValidFlagFormat(flag, GetFlags()))
             {
-                this._flags.Add(flag);
+                _flags.Add(flag);
             }
         }
 
@@ -160,7 +152,7 @@ namespace KLDSampleApp
             return Directory.Exists(path) || File.Exists(path);
         }
 
-        public override string ToString() => this.Value;
+        public override string ToString() => Value;
 
         private static bool IsValidFlagFormat(string newFlag, string[] currentFlags)
         {

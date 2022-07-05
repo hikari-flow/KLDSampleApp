@@ -2,7 +2,7 @@
 
 namespace KLDSampleApp
 {
-    class CliLogger : ILogger
+    public class CliLogger : ILogger
     {
         public void Log(string message)
         {

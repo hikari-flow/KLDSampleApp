@@ -1,6 +1,6 @@
 ﻿namespace KLDSampleApp
 {
-    enum PathConstraint
+    public enum PathConstraint
     {
         IsBoth,
         IsDirectory,

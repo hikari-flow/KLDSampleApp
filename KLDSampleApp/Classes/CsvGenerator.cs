@@ -4,13 +4,13 @@ using System.IO;
 
 namespace KLDSampleApp
 {
-    class CsvGenerator
+    public class CsvGenerator
     {
         private readonly ILogger _logger;
 
-        public CsvGenerator(ILogger logger) => this._logger = logger;
+        public CsvGenerator(ILogger logger) => _logger = logger;
 
-        public void Generate(FilePath inputPath, FilePath outputPath, List<string> filter = null)
+        public void Generate(FilePath inputPath, FilePath outputPath, IList<string> filter = null)
         {
             var searchOption = inputPath.ContainsFlag("-r") ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly;
 
@@ -36,7 +36,7 @@ namespace KLDSampleApp
             }
             catch (Exception e)
             {
-                this._logger.LogError(e.ToString());
+                _logger.LogError(e.ToString());
             }
         }
     }
