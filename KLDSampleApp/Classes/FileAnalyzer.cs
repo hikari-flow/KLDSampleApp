@@ -11,7 +11,7 @@ namespace KLDSampleApp
         private static Dictionary<string, string> FileTypes = ParseFileTypesList($"{Path.Join(GetSolutionDirectory(), "FileTypes.txt")}");
         
         /// <summary>
-        /// Reads the bytes of the file pointed in <paramref name="path"/> to get the magic number.
+        ///     Reads the bytes of the file pointed in <paramref name="path"/> to get the magic number.
         /// </summary>
         /// <param name="path">Path to file.</param>
         /// <returns>The detected extension of <paramref name="path"/> (ie. "jpg" or "pdf") in all uppercase.</returns>
@@ -42,23 +42,12 @@ namespace KLDSampleApp
         }
 
         /// <summary>
-        /// Calculates the MD5 of the file in the given <paramref name="path"/>.
+        ///     Calculates the MD5 of the file in the given <paramref name="path"/>.
         /// </summary>
         /// <param name="path">Path to file.</param>
         /// <returns>A string of the file's MD5 hash.</returns>
         public static string CalculateMD5(string path)
         {
-            /*
-            using (var md5 = MD5.Create())
-            {
-                using (var fileStream = File.OpenRead(path))
-                {
-                    var hash = md5.ComputeHash(fileStream);
-                    return BitConverter.ToString(hash).Replace("-", "").ToLowerInvariant();
-                }
-            }
-            */
-
             using var md5 = MD5.Create();
             using var fileStream = File.OpenRead(path);
             var hash = md5.ComputeHash(fileStream);
@@ -67,7 +56,7 @@ namespace KLDSampleApp
         }
 
         /// <summary>
-        /// Parses a list of file types into a Dictionary where the key is the extension and value is the signature. Every line must follow the format "extension:signature".
+        ///     Parses a list of file types into a Dictionary where the key is the extension and value is the signature. Every line must follow the format "extension:signature".
         /// </summary>
         /// <param name="path">Path to the text file.</param>
         /// <returns></returns>

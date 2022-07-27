@@ -9,7 +9,7 @@ namespace KLDSampleApp
     public class CliController : IInputRetriever
     {
         /// <summary>
-        /// Loop through list of required input from <paramref name="userInput"/> and request user input via CLI.
+        ///     Loop through list of required input from <paramref name="userInput"/> and request user input via CLI.
         /// </summary>
         /// <param name="userInput">List of all input values that need to be retrieved from user</param>
         public void GetUserInput(IDictionary<string, IUserInput> userInput)
@@ -45,7 +45,7 @@ namespace KLDSampleApp
         }
 
         /// <summary>
-        /// Turns console text to desired <paramref name="color"/>, displays message, then resets text color back to default. Doesn't write a newline at the end.
+        ///     Turns console text to desired <paramref name="color"/>, displays message, then resets text color back to default. Doesn't write a newline at the end.
         /// </summary>
         /// <param name="message">Message to be displayed.</param>
         /// <param name="color">Desired color to display message in (defaults to white).</param>
@@ -57,7 +57,7 @@ namespace KLDSampleApp
         }
 
         /// <summary>
-        /// Turns console text to red, displays message, then resets text color back to default.
+        ///     Turns console text to red, displays message, then resets text color back to default.
         /// </summary>
         /// <param name="message">Error message to be displayed</param>
         /// <param name="color"></param>
@@ -69,7 +69,7 @@ namespace KLDSampleApp
         }
 
         /// <summary>
-        /// Deals with the special properties of FilePath input types.
+        ///     Deals with the special properties of FilePath input types.
         /// </summary>
         /// <param name="path">The FilePath object to be handled.</param>
         private static void HandleFilePaths(FilePath path)

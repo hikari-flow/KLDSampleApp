@@ -87,14 +87,12 @@ namespace KLDSampleApp
         {
             FileAttributes attr = File.GetAttributes(_value);
 
-            return (attr & FileAttributes.Directory) == FileAttributes.Directory; // what does stuff in the parenthesis mean? why can't you just do (attr == FileAttributes.Directory)?
+            return (attr & FileAttributes.Directory) == FileAttributes.Directory;
         }
 
         public bool IsFile()
         {
-            FileAttributes attr = File.GetAttributes(_value);
-
-            return (attr & FileAttributes.Directory) != FileAttributes.Directory;
+            return !IsDirectory();
         }
 
         public string[] GetAcceptedFlags() => _acceptedFlags.Keys.ToArray();
